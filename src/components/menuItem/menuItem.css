@@ -1,0 +1,27 @@
+.menu-item {
+    display: flex;
+    max-width: 500px;
+    border: solid;
+    border-width: thin;
+    border-radius: 10px;
+    padding: 10px;
+    justify-content: space-between;
+    margin: 10px 0;
+
+    .item-image {
+        object-fit: contain;
+        width: 50%;
+        border-radius: 10%;
+    }
+    .text-area {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        text-align: right;
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    }
+}
