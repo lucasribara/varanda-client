@@ -8,11 +8,20 @@
     justify-content: space-between;
     margin: 10px 0;
 
+    @media (max-width: 500px) {
+        flex-direction: column;
+    }
+
     .item-image {
         object-fit: contain;
         width: 50%;
         border-radius: 10%;
+
+        @media (max-width: 500px) {
+            width: 100%;
+        }
     }
+
     .text-area {
         display: flex;
         flex-direction: column;

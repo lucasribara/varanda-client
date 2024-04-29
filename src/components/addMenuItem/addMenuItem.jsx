@@ -47,13 +47,17 @@ const AddMenuItem = () => {
         body: formData,
       }
     );
-    const savedAddedItem = await savedUserResponse.json();
-    console.log(savedAddedItem);
+    const savedAddedItem = await savedAddedItemResponse.json();
     onSubmitProps.resetForm();
+    return savedAddedItemResponse;
   }
 
   const handleFormSubmit = async (values, onSubmitProps) => {
-    await addItemOnMenu(values, onSubmitProps)
+    const response = await addItemOnMenu(values, onSubmitProps);
+    console.log(response.status === 201);
+    if(response.status === 201) {
+      window.location.reload();
+    }
   };
 
   return (
