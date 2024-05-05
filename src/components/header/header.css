@@ -1,0 +1,15 @@
+.header {
+    width: 100%;
+    background-image: url("../../assets/backgroundv2.png");
+    background-size: auto;
+    .logo {
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        @media (max-width: 768px) {
+            width: 100px;
+            height: 100px;
+        }
+    }
+
+}
