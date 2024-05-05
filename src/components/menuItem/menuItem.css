@@ -1,6 +1,5 @@
 .menu-item {
-    display: flex;
-    max-width: 500px;
+    display: flex;    
     border: solid;
     border-width: thin;
     border-radius: 10px;
@@ -13,8 +12,9 @@
     }
 
     .item-image {
-        object-fit: contain;
-        width: 50%;
+        object-fit: cover;
+        width: 300px;
+        height: 200px;
         border-radius: 10%;
 
         @media (max-width: 500px) {
@@ -31,6 +31,12 @@
         .title {
             font-size: 24px;
             font-weight: bold;
+            font-family: "Yeseva One", serif;
+        }
+
+        .price {
+            font-weight: bold;
+            padding-top: 10px;
         }
     }
 }

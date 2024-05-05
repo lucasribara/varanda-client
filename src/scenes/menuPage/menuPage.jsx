@@ -1,4 +1,5 @@
 import { React, useEffect, useState } from "react";
+import "./menuPage.css"
 import {
   Accordion,
   AccordionDetails,
@@ -6,9 +7,12 @@ import {
   Modal,
   Button
 } from "@mui/material";
+import { getMenu } from "../../actions/menu";
 import { ExpandMore } from "@mui/icons-material"
 import MenuItem from "../../components/menuItem/menuItem";
 import AddMenuItem from "../../components/addMenuItem/addMenuItem";
+import Header from "../../components/header/header";
+import Footer from "../../components/footer/footer";
 
 
 const MenuPage = () => {
@@ -37,19 +41,13 @@ const MenuPage = () => {
     }));
   }
 
-  const getMenu = async () => {
-    //action
-    const response = await fetch(`http://localhost:3001/menu`, {
-      method: "GET",
-    });
-    const data = await response.json();
-    console.log(data);
+  const updateMenu = async () => {
+    const data = await getMenu();
     setMenu(data);
   }
 
   useEffect(() => {
-    getMenu();
-
+    updateMenu();
   }, []);
 
   useEffect(() => {
@@ -70,43 +68,48 @@ const MenuPage = () => {
       </Modal>
     )
   }
-
+  console.log("env >>>>", import.meta.env.VITE_BASE_URL)
 
   if (!menu || !menuByCategory) {
     return null;
   }
   return (
-    <div>
+    <div className="menu-page">
+      <Header></Header>
+      <div className="menu-page-content">
       <Button onClick={handleOpen}> Adicionar item ao cardapio </Button>
-      {menuByCategory.map((category) => 
-        <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMore />}
-          id="panel1-header"
-          sx={{
-            height: "100px",
-            fontSize: "30px"
-          }}
-        >
-          {category.title}
-        </AccordionSummary>
-        <AccordionDetails>
-          <div>
-            {
-              category.items.map((item) =>
-                <MenuItem
-                  name={item.name}
-                  description={item.description}
-                  price={item.price}
-                  picture={item.picturePath}
-                  item={item}
-                />
-              )
-            }
-          </div>
-        </AccordionDetails>
-      </Accordion>
-      )}      
+        {menuByCategory.map((category) =>
+          <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMore />}
+              id="panel1-header"
+              sx={{
+                height: "100px",
+                fontSize: "30px",
+                fontFamily: ["Yeseva One", "serif"].join(","),
+              }}
+            >
+              {category.title}
+            </AccordionSummary>
+            <AccordionDetails>
+              <div>
+                {
+                  category.items.map((item) =>
+                    <MenuItem
+                      name={item.name}
+                      description={item.description}
+                      price={item.price}
+                      picture={item.picturePath}
+                      item={item}
+                    />
+                  )
+                }
+              </div>
+            </AccordionDetails>
+          </Accordion>
+        )}
+      </div>
+      <Footer />
       {addMenuItemModal()}
     </div>
   );

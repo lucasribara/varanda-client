@@ -5,6 +5,7 @@ import {
   Box,
   Button
 } from "@mui/material";
+import { addNewMenuItem } from "../../actions/menu";
 import EditOutlineIcon from "@mui/icons-material/EditOutlined";
 import { useState } from "react";
 import { Formik } from "formik";
@@ -40,14 +41,7 @@ const AddMenuItem = () => {
     }
     formData.append('picturePath', values.picture.name);
 
-    const savedAddedItemResponse = await fetch(
-      "http://localhost:3001/menu/add",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-    const savedAddedItem = await savedAddedItemResponse.json();
+    const savedAddedItemResponse = await addNewMenuItem(formData);
     onSubmitProps.resetForm();
     return savedAddedItemResponse;
   }
