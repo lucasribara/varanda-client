@@ -68,7 +68,6 @@ const MenuPage = () => {
       </Modal>
     )
   }
-  console.log("env >>>>", import.meta.env.VITE_BASE_URL)
 
   if (!menu || !menuByCategory) {
     return null;
@@ -77,7 +76,7 @@ const MenuPage = () => {
     <div className="menu-page">
       <Header></Header>
       <div className="menu-page-content">
-      <Button onClick={handleOpen}> Adicionar item ao cardapio </Button>
+      {/* <Button onClick={handleOpen}> Adicionar item ao cardapio </Button> */}
         {menuByCategory.map((category) =>
           <Accordion>
             <AccordionSummary

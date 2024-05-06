@@ -5,7 +5,6 @@ import { Button } from "@mui/material";
 const MenuItem = ({ item }) => {
   const handleDelete = async () => {
     const response = await deleteMenuItem(item._id);
-    console.log(response);
     if(response.status === 200) {
       window.location.reload();
     }
@@ -21,7 +20,7 @@ const MenuItem = ({ item }) => {
           <div> {item.description} </div>
         </div>
         <div className="price"> R${item.price} </div>
-        <Button onClick={handleDelete}> Deletar item </Button>
+        {/* <Button onClick={handleDelete}> Deletar item </Button> */}
       </div>
     </div>
   );
