@@ -1,0 +1,56 @@
+.footer {
+  background-color: #576441;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50px;
+  padding: 20px;
+  
+  @media (max-width: 768px) {
+   flex-direction: column;
+   align-items: center;
+  }
+
+  .information {
+    width: 25%;
+    background-color: #C3D79C;
+    border-radius: 10px;
+    padding: 10px;
+    @media (max-width: 768px) {
+      margin-bottom: 10px;
+      width: 80%;
+     }
+
+    .title {
+      font-family: "Yeseva One", serif;
+    }
+
+    .text {
+      display: flex;
+      flex-direction: column;
+      font-size: 12px;
+      padding: 20px 0;
+    }
+
+    .woring-schedule {
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+
+      .subtitle {
+        font-weight: bold;
+      }
+
+      .info {
+        color: #8A9B6D;
+      }
+    }
+  }
+
+  .footer-logo {
+    width: 25%;
+    background-image: url(/src/assets/varanda-logo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
