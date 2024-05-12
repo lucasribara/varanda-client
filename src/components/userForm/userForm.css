@@ -1,14 +1,11 @@
-.add-menu-item-modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
+.user-form {
+    width: 100%;
     max-height: 800px;
     background-color: #f5f5dc;
-    border-radius: 8px;
+    border-radius: 1.5rem;
+    padding: 10px 0;
 
-    .modal-content {
+    .form-content {
         margin: 20px 40px;
         @media (max-width: 500px) {
             margin: 20px;
@@ -16,12 +13,14 @@
 
         .input-section {
             margin: 20px;
-            border: solid;
-            border-width: thin;
             border-radius: 10px;
             @media (max-width: 500px) {
                 margin: 5px;
             }
+        }
+
+        .change-register-login {
+            display: flex;
         }
     }
 }

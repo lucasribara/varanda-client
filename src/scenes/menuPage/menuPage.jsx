@@ -1,5 +1,4 @@
 import { React, useEffect, useState } from "react";
-import "./menuPage.css"
 import {
   Accordion,
   AccordionDetails,
@@ -13,7 +12,7 @@ import MenuItem from "../../components/menuItem/menuItem";
 import AddMenuItem from "../../components/addMenuItem/addMenuItem";
 import Header from "../../components/header/header";
 import Footer from "../../components/footer/footer";
-
+import "./menuPage.css"
 
 const MenuPage = () => {
   const [menu, setMenu] = useState(null);
@@ -74,9 +73,9 @@ const MenuPage = () => {
   }
   return (
     <div className="menu-page">
-      <Header></Header>
+      <Header />
       <div className="menu-page-content">
-      {/* <Button onClick={handleOpen}> Adicionar item ao cardapio </Button> */}
+      <Button onClick={handleOpen}> Adicionar item ao cardapio </Button>
         {menuByCategory.map((category) =>
           <Accordion>
             <AccordionSummary

@@ -20,7 +20,7 @@ const MenuItem = ({ item }) => {
           <div> {item.description} </div>
         </div>
         <div className="price"> R${item.price} </div>
-        {/* <Button onClick={handleDelete}> Deletar item </Button> */}
+        <Button onClick={handleDelete}> Deletar item </Button>
       </div>
     </div>
   );

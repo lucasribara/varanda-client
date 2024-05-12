@@ -1,5 +1,4 @@
 import "./footer.css";
-import logo from "../../assets/varanda-logov2.png"
 
 const Footer = () => {
   return (

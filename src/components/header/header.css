@@ -2,6 +2,7 @@
     width: 100%;
     background-image: url("../../assets/backgroundv2.png");
     background-size: auto;
+    margin-bottom: 50px;
     .logo {
         width: 300px;
         height: 300px;
