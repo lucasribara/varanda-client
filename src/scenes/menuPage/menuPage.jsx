@@ -1,4 +1,5 @@
 import { React, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import {
   Accordion,
   AccordionDetails,
@@ -18,6 +19,10 @@ const MenuPage = () => {
   const [menu, setMenu] = useState(null);
   const [menuByCategory, setMenuByCategory] = useState(null)
   const [showAddModal, setShowAddModal] = useState(false);
+  const currentUser = useSelector((state) => state.user);
+  console.log(currentUser);
+  const isAdmin = currentUser && currentUser.role ==="admin";
+
   const handleOpen = () => {
     setShowAddModal(true);
   };
@@ -63,7 +68,7 @@ const MenuPage = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <AddMenuItem></AddMenuItem>
+        <AddMenuItem />
       </Modal>
     )
   }
@@ -75,7 +80,7 @@ const MenuPage = () => {
     <div className="menu-page">
       <Header />
       <div className="menu-page-content">
-      <Button onClick={handleOpen}> Adicionar item ao cardapio </Button>
+      {isAdmin && <Button onClick={handleOpen}> Adicionar item ao cardapio </Button>}
         {menuByCategory.map((category) =>
           <Accordion>
             <AccordionSummary

@@ -8,7 +8,7 @@ const LoginPage = () => {
 
   return (
     <div className="login-page">
-      <Header />
+      <Header inLogin />
       <div className="body">
         <div className="title">
           Bem vindo ao Varanda Bistrô
