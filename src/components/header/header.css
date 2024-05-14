@@ -2,9 +2,10 @@
     width: 100%;
     background-image: url("../../assets/backgroundv2.png");
     background-size: auto;
+    margin-bottom: 50px;
     .logo {
-        width: 300px;
-        height: 300px;
+        width: 200px;
+        height: 200px;
         border-radius: 50%;
         @media (max-width: 768px) {
             width: 100px;
@@ -12,4 +13,16 @@
         }
     }
 
+}
+.user-bar {
+    width: 100%;
+    background-color: #C3D79C;
+    .loggedin-user {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .loggedout {        
+        display: flex;
+    }
 }

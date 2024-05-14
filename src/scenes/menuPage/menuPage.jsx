@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import "./menuPage.css"
+import { useSelector } from "react-redux";
 import {
   Accordion,
   AccordionDetails,
@@ -13,12 +13,15 @@ import MenuItem from "../../components/menuItem/menuItem";
 import AddMenuItem from "../../components/addMenuItem/addMenuItem";
 import Header from "../../components/header/header";
 import Footer from "../../components/footer/footer";
-
+import "./menuPage.css"
 
 const MenuPage = () => {
   const [menu, setMenu] = useState(null);
   const [menuByCategory, setMenuByCategory] = useState(null)
   const [showAddModal, setShowAddModal] = useState(false);
+  const currentUser = useSelector((state) => state.user);
+  const isAdmin = currentUser && currentUser.role ==="admin";
+
   const handleOpen = () => {
     setShowAddModal(true);
   };
@@ -64,7 +67,7 @@ const MenuPage = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <AddMenuItem></AddMenuItem>
+        <AddMenuItem />
       </Modal>
     )
   }
@@ -74,9 +77,9 @@ const MenuPage = () => {
   }
   return (
     <div className="menu-page">
-      <Header></Header>
+      <Header />
       <div className="menu-page-content">
-      {/* <Button onClick={handleOpen}> Adicionar item ao cardapio </Button> */}
+      {isAdmin && <Button onClick={handleOpen}> Adicionar item ao cardapio </Button>}
         {menuByCategory.map((category) =>
           <Accordion>
             <AccordionSummary

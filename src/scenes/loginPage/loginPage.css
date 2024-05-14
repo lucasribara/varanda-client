@@ -1,0 +1,15 @@
+.login-page {
+    .body {
+        margin: 2rem 15px;
+        padding: 10px 20px;
+        border-radius: 1.5rem;
+        background-color: #C3D79C;
+
+        .title {
+            font-family: "Yeseva One", serif;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            font-size: 28px;
+        }
+    }
+}
