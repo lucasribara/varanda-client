@@ -19,7 +19,7 @@ const Header = (props) => {
           <Button onClick={() => dispatch(setLogout())}> Sair </Button>
         </div>
         <div>
-          <Person fontSize="large" onClick={() => { console.log("Person") }} sx={{ "&:hover": { cursor: "pointer" }, pr: "1.5rem" }} />
+          <Person fontSize="large" onClick={() => { navigate("/usuario") }} sx={{ "&:hover": { cursor: "pointer" }, pr: "1.5rem" }} />
           <ShoppingBag fontSize="large" onClick={() => { console.log("Bag") }} sx={{ "&:hover": { cursor: "pointer" } }} />
         </div>
       </div>
@@ -37,16 +37,15 @@ const Header = (props) => {
 
   return (
     <>
-      <div className="header">
-        <img className="logo" alt="varanda-logo" src={logo} onClick={() => navigate("/")}/>
-      </div>
       {!props.inLogin &&
         <div className="user-bar">
           {isAuth && userSection()}
           {!isAuth && loginButton()}
         </div>
       }
-
+      <div className="header">
+        <img className="logo" alt="varanda-logo" src={logo} onClick={() => navigate("/")} />
+      </div>
     </>
   );
 }

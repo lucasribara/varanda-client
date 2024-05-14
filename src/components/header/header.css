@@ -2,6 +2,7 @@
     width: 100%;
     background-image: url("../../assets/backgroundv2.png");
     background-size: auto;
+    margin-bottom: 50px;
     .logo {
         width: 200px;
         height: 200px;
@@ -15,9 +16,7 @@
 }
 .user-bar {
     width: 100%;
-    margin-bottom: 50px;
     background-color: #C3D79C;
-
     .loggedin-user {
         display: flex;
         justify-content: space-between;
