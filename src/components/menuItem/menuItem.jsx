@@ -5,10 +5,11 @@ import "./menuItem.css"
 
 const MenuItem = ({ item }) => {
   const currentUser = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
   const isAdmin = currentUser && currentUser.role ==="admin";
 
   const handleDelete = async () => {
-    const response = await deleteMenuItem(item._id);
+    const response = await deleteMenuItem(item._id, token);
     if(response.status === 200) {
       window.location.reload();
     }

@@ -20,7 +20,6 @@ const MenuPage = () => {
   const [menuByCategory, setMenuByCategory] = useState(null)
   const [showAddModal, setShowAddModal] = useState(false);
   const currentUser = useSelector((state) => state.user);
-  console.log(currentUser);
   const isAdmin = currentUser && currentUser.role ==="admin";
 
   const handleOpen = () => {

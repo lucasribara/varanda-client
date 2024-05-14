@@ -8,6 +8,7 @@ import {
 import { addNewMenuItem } from "../../actions/menu";
 import EditOutlineIcon from "@mui/icons-material/EditOutlined";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Formik } from "formik";
 import Dropzone from "react-dropzone";
 import * as yup from "yup";
@@ -32,6 +33,7 @@ const initialValuesMenuItem = {
 const AddMenuItem = () => {
   const [image, setImage] = useState(null);
   const isNonMobile = useMediaQuery("(min-width: 600px)");
+  const token = useSelector((state) => state.token)
 
   const addItemOnMenu = async (values, onSubmitProps) => {
     // action
@@ -41,7 +43,7 @@ const AddMenuItem = () => {
     }
     formData.append('picturePath', values.picture.name);
 
-    const savedAddedItemResponse = await addNewMenuItem(formData);
+    const savedAddedItemResponse = await addNewMenuItem(formData, token);
     onSubmitProps.resetForm();
     return savedAddedItemResponse;
   }
