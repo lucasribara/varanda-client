@@ -67,7 +67,7 @@ const OrdersPage = () => {
     }
   }, [orders]);
 
-  if( !orders || !ordersByState ) { return null }
+  if( !orders || !ordersByState ) { return <Header /> }
   return (
     <>
       <Header />
