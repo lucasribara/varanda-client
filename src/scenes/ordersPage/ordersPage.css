@@ -1,0 +1,9 @@
+.orders {
+    background-color: white;
+    border-radius: 8px;
+
+    .tab-content {
+        margin: 10px;
+    }
+ 
+}

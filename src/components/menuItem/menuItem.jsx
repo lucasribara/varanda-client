@@ -3,9 +3,10 @@ import { deleteMenuItem } from "../../actions/menu";
 import { Button } from "@mui/material";
 import "./menuItem.css"
 
-const MenuItem = ({ item }) => {
+const MenuItem = ({ item, addToBag }) => {
   const currentUser = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
+  const isAuth = Boolean(useSelector((state) => state.token));
   const isAdmin = currentUser && currentUser.role ==="admin";
 
   const handleDelete = async () => {
@@ -26,6 +27,8 @@ const MenuItem = ({ item }) => {
         </div>
         <div className="price"> R${item.price} </div>
         {isAdmin && <Button onClick={handleDelete}> Deletar item </Button>}
+        {/* {isAuth && !isAdmin && <Button onClick={addToBag(item)}> Adicionar a sacola</Button>} */}
+        {isAuth && <Button onClick={() => addToBag(item)}> Adicionar a sacola</Button>}
       </div>
     </div>
   );
