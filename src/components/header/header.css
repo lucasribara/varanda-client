@@ -4,6 +4,7 @@
     background-size: auto;
     margin-bottom: 50px;
     .logo {
+        cursor: pointer;
         width: 200px;
         height: 200px;
         border-radius: 50%;
@@ -21,6 +22,12 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+
+        .actions {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px 5px;
+        }
     }
     .loggedout {        
         display: flex;
