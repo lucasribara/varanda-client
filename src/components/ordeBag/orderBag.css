@@ -7,9 +7,12 @@
   max-height: 800px;
   background-color: #f5f5dc;
   border-radius: 8px;
+  color: black;
+  overflow: auto;
 
   @media (max-width: 768px) {
     width: 90%;
+    max-height: 70%;
   }
 
   .title {
