@@ -51,9 +51,8 @@ const UserForm = () => {
   const dispatch = useDispatch();
 
   const registerUser = async (values, onSubmitProps) => {
+    values.phoneNumber = values.phoneNumber.replace(/\D/g, '');
     const response = await register(JSON.stringify(values));
-    console.log(response);
-    console.log("Registered User");
     onSubmitProps.resetForm();
 
     setPageType("login");
