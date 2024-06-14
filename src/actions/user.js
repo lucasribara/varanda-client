@@ -14,6 +14,7 @@ export const login = async (values) => {
     headers: { "Content-Type": "application/json" },
     body: values,
   });
+  if(response.status != 200) return null;
   const data = await response.json();
   return data;
 };

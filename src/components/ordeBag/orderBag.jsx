@@ -5,6 +5,7 @@ import { setBag, setUserOrders } from "../../state";
 import { createOrder, getUserOrder } from "../../actions/order";
 import { getIdsFromOrder } from "../../helpers/orderHelper";
 import { Button, TextField } from "@mui/material";
+import io from "socket.io-client";
 import "./orderBag.css"
 
 const OrderBag = () => {
@@ -13,8 +14,13 @@ const OrderBag = () => {
   const token = useSelector((state) => state.token);
   const bag = useSelector((state) => state.bag);
   const bagPrice = useSelector((state) => state.bagPrice);
+  const socket = io.connect(import.meta.env.VITE_BASE_URL);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const sendNotificationCreateOrder = () => {
+    socket.emit("order_created", { message: "Order Created", room: "1" });
+  };
 
   const removeItemToBag = (index, item) => {
     let removeBag = bag ? [...bag] : [];
@@ -46,8 +52,9 @@ const OrderBag = () => {
           bagPrice: 0
         })
       );
+      sendNotificationCreateOrder();
       const userOrders = await getUserOrder(currentUser._id, token);
-      if(userOrders) {
+      if (userOrders) {
         dispatch(
           setUserOrders({
             userOrders: userOrders

@@ -80,6 +80,17 @@ const MenuPage = () => {
     )
   }
 
+// useEffect(() => {
+//   socket.on("receive_message", (data) => {
+//     console.log(">>>>>>>>>>>", data.message)
+//   })
+// }, [socket])
+
+//   const sendMessage = () => {
+//     socket.emit("order_created", {message: "Order Created", room: "1" });
+//   };
+
+  
   if (!menu || !menuByCategory) {
     return null;
   }
