@@ -8,16 +8,25 @@ import { setOrders } from "../../state";
 import { getOrdersByStatus } from "../../helpers/orderHelper";
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import io from "socket.io-client";
 import "./ordersPage.css"
+import { Button } from "@mui/material";
 
 
 const OrdersPage = () => {
   const currentUser = useSelector((state) => state.user);
+  const isAdmin = currentUser && currentUser.role === "admin";
   const token = useSelector((state) => state.token);
   const orders = useSelector((state) => state.orders);
   const dispatch = useDispatch();
+  const socket = io.connect(import.meta.env.VITE_BASE_URL);
   const [value, setValue] = useState('1');
   const [ordersByState, setOrdersByState] = useState(null);
+  const [shouldUpdateOrders, setShouldUpdateOrders] = useState(false);
+
+  const joinRoomAdmin = () => {
+    socket.emit("join_admin", "1");
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -34,22 +43,21 @@ const OrdersPage = () => {
   }
 
   const updateStatus = async (order) => {
-    const newStatus = { code: order.state.code+1 }
+    const newStatus = { code: order.state.code + 1 }
     console.log(newStatus);
     const data = await updateOrderStatus(order._id, JSON.stringify(newStatus), token);
     fetchOrders();
-    console.log("Atualizando o Status")
   }
 
   const renderOrdersList = (sectionOrders) => {
-    if(!sectionOrders) {
+    if (!sectionOrders) {
       return (<div>Sem pedidos nessa sessão</div>);
     }
     return (
       <div>
         {
           sectionOrders.map((order) =>
-            <OrderItem order={order} user={order.user} isAdmin={true} updateOrder={updateStatus}/>
+            <OrderItem order={order} user={order.user} isAdmin={true} updateOrder={updateStatus} />
           )
         }
       </div>
@@ -58,20 +66,40 @@ const OrdersPage = () => {
   }
 
   useEffect(() => {
-    fetchOrders();
+    if (isAdmin) {
+      fetchOrders();
+      joinRoomAdmin();
+    }
   }, []);
 
   useEffect(() => {
     if (orders && orders.length > 0) {
       setOrdersByState(getOrdersByStatus(orders));
+      setShouldUpdateOrders(false);
     }
   }, [orders]);
 
-  if( !orders || !ordersByState ) { return <Header /> }
+
+  useEffect(() => {
+    socket.on("receive_message", (data) => {
+      console.log(">>>>>>>>>>>", data.message)
+      setShouldUpdateOrders(true);
+    })
+  }, [socket])
+
+  if (!orders || !ordersByState) { return <Header /> }
   return (
     <>
       <Header />
       <div className="orders">
+        <Button 
+          onClick={fetchOrders}
+          variant={shouldUpdateOrders ? "contained" : "text"}
+          color={shouldUpdateOrders ? "error" : "primary"}
+          >
+            Atualizar Pedidos
+        </Button>
+        {shouldUpdateOrders && <div>Você possui novos pedidos </div>}
         <Tabs
           value={value}
           onChange={handleChange}
