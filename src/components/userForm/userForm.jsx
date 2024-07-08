@@ -3,7 +3,8 @@ import {
   TextField,
   Box,
   useMediaQuery,
-  Button
+  Button,
+  Snackbar
 } from "@mui/material";
 import { register, login } from "../../actions/user"
 import { useState } from "react";
@@ -44,6 +45,8 @@ const initialValuesLogin = {
 
 const UserForm = () => {
   const [pageType, setPageType] = useState("login");
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [snackbarText, setSnackbarText] = useState("");
   const isLogin = pageType === "login";
   const isRegister = pageType === "register";
   const isMobile = useMediaQuery("(max-width: 500px)");
@@ -60,8 +63,8 @@ const UserForm = () => {
 
   const loginUser = async (values, onSubmitProps) => {
     const loggedIn = await login(JSON.stringify(values));
-    //console.log("LOGINRESPONSE >>>>>",loggedIn);
-    if (loggedIn) {      
+    console.log("LOGINRESPONSE >>>>>",loggedIn);
+    if (loggedIn.status !== 400) {      
       dispatch(
         setLogin({
           user: loggedIn.user,
@@ -69,6 +72,10 @@ const UserForm = () => {
         })
       );
       navigate("/");
+    }
+    else {
+      setSnackbarText(loggedIn.msg);
+      setShowSnackbar(true);
     }
     onSubmitProps.resetForm();
   }
@@ -216,6 +223,13 @@ const UserForm = () => {
           </Formik>
         </div>
       </div>
+      <Snackbar
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        open={showSnackbar}
+        autoHideDuration={6000}
+        onClose={() => setShowSnackbar(false)}
+        message={snackbarText}
+      />
     </div>
   );
 

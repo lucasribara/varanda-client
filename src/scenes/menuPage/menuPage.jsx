@@ -80,17 +80,6 @@ const MenuPage = () => {
     )
   }
 
-// useEffect(() => {
-//   socket.on("receive_message", (data) => {
-//     console.log(">>>>>>>>>>>", data.message)
-//   })
-// }, [socket])
-
-//   const sendMessage = () => {
-//     socket.emit("order_created", {message: "Order Created", room: "1" });
-//   };
-
-  
   if (!menu || !menuByCategory) {
     return null;
   }
@@ -99,8 +88,8 @@ const MenuPage = () => {
       <Header />
       <div className="menu-page-content">
         {isAdmin && <Button onClick={handleOpen}> Adicionar item ao cardapio </Button>}
-        {menuByCategory.map((category, index) =>
-          <div key={index}>
+        {menuByCategory.map((category) =>
+          <div key={category.title}>
             <Accordion>
               <AccordionSummary
                 expandIcon={<ExpandMore />}

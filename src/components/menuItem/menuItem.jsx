@@ -8,6 +8,7 @@ const MenuItem = ({ item, addToBag }) => {
   const token = useSelector((state) => state.token);
   const isAuth = Boolean(useSelector((state) => state.token));
   const isAdmin = currentUser && currentUser.role ==="admin";
+  console.log(item);
 
   const handleDelete = async () => {
     const response = await deleteMenuItem(item._id, token);
@@ -18,7 +19,7 @@ const MenuItem = ({ item, addToBag }) => {
 
   const image = `${import.meta.env.VITE_BASE_URL}/assets/${item.picturePath}`
   return (
-    <div className="menu-item" key={item.name}>
+    <div className="menu-item" key={item._id}>
       <img className="item-image" alt="foodImage" src={image} />
       <div className="text-area">
         <div>
