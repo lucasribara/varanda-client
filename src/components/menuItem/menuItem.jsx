@@ -18,7 +18,7 @@ const MenuItem = ({ item, addToBag }) => {
 
   const image = `${import.meta.env.VITE_BASE_URL}/assets/${item.picturePath}`
   return (
-    <div className="menu-item" key={item.name}>
+    <div className="menu-item" key={item._id}>
       <img className="item-image" alt="foodImage" src={image} />
       <div className="text-area">
         <div>
