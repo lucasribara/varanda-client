@@ -8,7 +8,6 @@ const MenuItem = ({ item, addToBag }) => {
   const token = useSelector((state) => state.token);
   const isAuth = Boolean(useSelector((state) => state.token));
   const isAdmin = currentUser && currentUser.role ==="admin";
-  console.log(item);
 
   const handleDelete = async () => {
     const response = await deleteMenuItem(item._id, token);

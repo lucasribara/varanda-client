@@ -1,11 +1,13 @@
 import Header from "../../components/header/header";
 import Footer from "../../components/footer/footer";
+import { useState } from "react";
 import {
   Typography,
   TextField,
   Box,
   useMediaQuery,
-  Button
+  Button,
+  Snackbar
 } from "@mui/material";
 import { Formik } from "formik";
 import { updateUser } from "../../actions/user";
@@ -26,6 +28,8 @@ const schema = yup.object().shape({
 const AccountPage = () => {
   const currentUser = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const [snackbarText, setSnackbarText] = useState("");
   const dispatch = useDispatch();
   const isMobile = useMediaQuery("(max-width: 500px)");
 
@@ -38,14 +42,20 @@ const AccountPage = () => {
   }
 
   const handleFormSubmit = async (values, onSubmitProps) => {
+    if (values.phoneNumber) {
+      values.phoneNumber = values.phoneNumber.toString().replace(/\D/g, '');
+    }
     const edditedUser = await updateUser(JSON.stringify(values), currentUser._id, token);
     console.log(edditedUser);
-    if(edditedUser) {
+    if (!edditedUser.errStatus) {
       dispatch(
         setUser({
           user: edditedUser,
         })
       );
+    } else {
+      setSnackbarText(edditedUser.msg);
+      setShowSnackbar(true);
     }
   };
 
@@ -144,13 +154,20 @@ const AccountPage = () => {
                     }}
                   >
                     Concluir alterações
-                  </Button>                  
+                  </Button>
                 </Box>
               </form>
             )
             }
           </Formik>
         </div>
+        <Snackbar
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+          open={showSnackbar}
+          autoHideDuration={6000}
+          onClose={() => setShowSnackbar(false)}
+          message={snackbarText}
+        />
       </div>
       <Footer />
     </>

@@ -56,15 +56,21 @@ const UserForm = () => {
   const registerUser = async (values, onSubmitProps) => {
     values.phoneNumber = values.phoneNumber.replace(/\D/g, '');
     const response = await register(JSON.stringify(values));
-    onSubmitProps.resetForm();
-
-    setPageType("login");
+    console.log("LOGINRESPONSE >>>>>",response);
+    if (!response.errStatus) {      
+      setPageType("login");
+      onSubmitProps.resetForm();
+    }
+    else {
+      setSnackbarText(response.msg);
+      setShowSnackbar(true);
+    }
   }
 
   const loginUser = async (values, onSubmitProps) => {
     const loggedIn = await login(JSON.stringify(values));
     console.log("LOGINRESPONSE >>>>>",loggedIn);
-    if (loggedIn.status !== 400) {      
+    if (!loggedIn.errStatus) {      
       dispatch(
         setLogin({
           user: loggedIn.user,
